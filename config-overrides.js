@@ -1,4 +1,5 @@
-const { override, addDecoratorsLegacy } = require('customize-cra');
-module.exports = override(
-    addDecoratorsLegacy()
-);
+const { useBabelRc, override } = require('customize-cra')
+
+const config = override(useBabelRc())
+
+module.exports = config
