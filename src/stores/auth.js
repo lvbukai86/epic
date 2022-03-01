@@ -4,8 +4,8 @@ class AuthStore{
     @observable isLogin=false;
     @observable isLoading=false;
     @observable values={
-        username:'',
-        password:''
+        username:'ada',
+        password:'123'
     };
     @action setIsLogin(isLogin){
         this.isLogin=isLogin;

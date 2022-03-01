@@ -32,6 +32,7 @@ function Component(){
             <StyledLink to={'/history'} activeclassname={'active'}>上传记录</StyledLink>
             <StyledLink to={'/about'} activeclassname={'active'}>关于我</StyledLink>
         </nav>
+
         </Header>
     )
 };
