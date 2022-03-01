@@ -7,7 +7,7 @@ const Component=observer(()=>{
     const { AuthStore }=useStores();
     const inputRef=useRef();
     const bindChange= e => {
-        AuthStore.setUsername(inputRef.current.value)
+        AuthStore.setUsername(inputRef.current.value);
         console.log(AuthStore.values.username)
     }
     return (

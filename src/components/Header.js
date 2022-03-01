@@ -9,6 +9,8 @@ const Header=styled.header`
   display: flex;
   align-items: center;
   color: #fff;
+  justify-content: space-between;
+  align-items: center;
 `
 const  Logo=styled.img`
   height: 30px;
@@ -24,15 +26,21 @@ const StyledLink=styled(NavLink)`
 
 function Component(){
     return (
-        < Header>
+        <Header>
             <Logo src={LogoUrl} />
-
         <nav>
             <StyledLink to={'/'} activeclassname={'active'}>首页</StyledLink>
             <StyledLink to={'/history'} activeclassname={'active'}>上传记录</StyledLink>
             <StyledLink to={'/about'} activeclassname={'active'}>关于我</StyledLink>
         </nav>
-
+            <div>
+            <button>
+                <StyledLink to={'/login'} >登录</StyledLink>
+            </button>
+            <button>
+                <StyledLink to={'/register'}>登录</StyledLink>
+            </button>
+            </div>
         </Header>
     )
 };
