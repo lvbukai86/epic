@@ -1,10 +1,11 @@
 import React,{useState} from "react";
 import LogoUrl from './logo.svg'
-import {NavLink} from "react-router-dom";
+import {NavLink,useNavigate} from "react-router-dom";
 import styled from 'styled-components';
 import  {Button} from 'antd';
 import { useStores } from '../stores';
 import { observer } from 'mobx-react';
+
 
 const Header=styled.header`
   padding: 10px 100px;
@@ -34,16 +35,18 @@ margin-left: 10px;
 `
 
 const  Component = observer(() => {
-    const [isLogin,setIsLogin]=useState(false);
+    let navigate = useNavigate();
     const {UserStore,AuthStore}=useStores();
     const handleLogout=()=>{
             AuthStore.logout();
     };
     const handleLogin=()=>{
-        console.log('跳登录')
+        console.log('跳登录');
+        navigate('/login');
     };
     const handleRegister=()=>{
-        console.log('跳注册')
+        console.log('跳注册');
+        navigate('/register');
     };
     return (
         <Header>

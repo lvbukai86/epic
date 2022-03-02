@@ -1,7 +1,9 @@
 import React from "react";
 import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
-import  {useStores} from '../stores'
+import  {useStores} from '../stores';
+import {useNavigate} from "react-router-dom";
+
 
 const Wrapper=styled.div`
   max-width: 600px;
@@ -15,11 +17,13 @@ text-align: center;
 `
 const Component = () => {
     const {AuthStore}=useStores();
+    let navigate = useNavigate();
     const onFinish = (values) => {
         AuthStore.setUsername(values.username);
         AuthStore.setPassword(values.password);
         AuthStore.login().then(()=>{
             console.log('login success')
+            navigate('/');
         }).catch((err)=>{
             console.log(err)
         })
