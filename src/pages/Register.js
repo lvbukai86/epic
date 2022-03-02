@@ -28,10 +28,10 @@ const Component = () => {
         <Form
             name="basic"
             labelCol={{
-                span: 4,
+                span: 6,
             }}
             wrapperCol={{
-                span: 20,
+                span: 18,
             }}
             initialValues={{
                 remember: true,
@@ -61,38 +61,45 @@ const Component = () => {
                         required: true,
                         message: '请输入密码!',
                     },
+                    {
+                        min:4,
+                        message:'最少4个字符'
+                    },
+                    {
+                        max:10,
+                        message:'最大10个字符'
+                    }
                 ]}
             >
                 <Input.Password />
             </Form.Item>
             <Form.Item
                 label="确认密码"
-                name="password"
+                name="repassword"
                 rules={[
                     {
                         required: true,
                         message: '两次密码必须一直!',
                     },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('两次密码必须一致!'));
+                        },
+                    }),
                 ]}
             >
                 <Input.Password />
             </Form.Item>
 
-            <Form.Item
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
-                <Checkbox>记住我</Checkbox>
-            </Form.Item>
+
 
             <Form.Item
                 wrapperCol={{
-                    offset: 8,
-                    span: 16,
+                    offset: 6,
+                    span: 18,
                 }}
             >
                 <Button type="primary" htmlType="submit">
