@@ -3,7 +3,8 @@ import LogoUrl from './logo.svg'
 import {NavLink} from "react-router-dom";
 import styled from 'styled-components';
 import  {Button} from 'antd';
-
+import { useStores } from '../stores';
+import { observer } from 'mobx-react';
 
 const Header=styled.header`
   padding: 10px 100px;
@@ -28,12 +29,22 @@ const StyledLink=styled(NavLink)`
 const Login=styled.div`
     margin-left:auto;
 `
-const StyledButtion=styled(Button)`
+const StyledButton=styled(Button)`
 margin-left: 10px;
 `
 
-function Component(){
+const  Component = observer(() => {
     const [isLogin,setIsLogin]=useState(false);
+    const {UserStore,AuthStore}=useStores();
+    const handleLogout=()=>{
+            AuthStore.logout();
+    };
+    const handleLogin=()=>{
+        console.log('跳登录')
+    };
+    const handleRegister=()=>{
+        console.log('跳注册')
+    };
     return (
         <Header>
             <Logo src={LogoUrl} />
@@ -44,16 +55,16 @@ function Component(){
         </nav>
             <Login>
                 {
-                   isLogin ?<>
-                     ADA 注销  <StyledButtion type="primary" onClick={()=>setIsLogin(false)}>注销</StyledButtion>
-                   </> :    <>
-                       <StyledButtion type="primary" onClick={()=>setIsLogin(true)}>登录</StyledButtion>
-                       <StyledButtion type="primary">注册</StyledButtion>
-                   </>
-                }
+                    UserStore.currentUser? <>
+                        {UserStore.currentUser.attributes.username} <StyledButton type="primary" onClick={handleLogout}>注销</StyledButton>
+                    </> :<>
+                        <StyledButton type="primary" onClick={handleLogin}>登录</StyledButton>
+                        <StyledButton type="primary" onClick={handleRegister}>注册</StyledButton>
+                    </>
 
+                }
             </Login>
         </Header>
-    )
-};
+    );
+});
 export default Component
