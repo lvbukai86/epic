@@ -1,39 +1,49 @@
 import {observable,action,makeObservable} from 'mobx';
+import {Auth} from "../models";
 
 class AuthStore{
-    @observable isLogin=false;
-    @observable isLoading=false;
     @observable values={
-        username:'ada',
-        password:'123'
+        username:'',
+        password:''
     };
     constructor() {
         makeObservable(this);
-    }
-    @action setIsLogin(isLogin){
-        this.isLogin=isLogin;
     }
     @action setUsername(username){
         this.values.username=username;
 
     }
     @action setPassword(password){
-    this.values.username=password;
+    this.values.password=password;
      }
      @action login(){
-        console.log('登录成功');
-        this.setUsername('ada');
-        this.isLogin=true;
-        this.isLoading=false;
+        return new Promise((resolve,reject)=>{
+            Auth.login(this.values.username,this.values.password).then(user=>{
+                console.log('登录成功')
+               resolve(user);
+            }).catch(err=>{
+                console.log('登录失败');
+              reject(err);
+            })
+        });
+
      }
      @action register(){
-         console.log('注册成功');
-         this.setUsername('ada');
-         this.isLogin=true;
-         this.isLoading=false;
+         return new Promise((resolve,reject)=>{
+             console.log('name'+this.values.username)
+             console.log('mima'+this.values.password)
+             Auth.register(this.values.username,this.values.password).then(user=>{
+                 console.log('注册成功')
+                 resolve(user);
+             }).catch(err=>{
+                 console.log('注册失败');
+                 reject(err);
+             })
+         });
+
     }
     @action logout(){
-       console.log('已注销') ;
+       Auth.logout()
     }
 }
 
