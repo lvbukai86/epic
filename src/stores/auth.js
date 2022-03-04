@@ -1,6 +1,8 @@
 import {observable,action,makeObservable} from 'mobx';
 import {Auth} from "../models";
 import UserStore from './user';
+import {message} from "antd";
+
 class AuthStore{
     @observable values={
         username:'',
@@ -22,7 +24,7 @@ class AuthStore{
                 UserStore.pullUser();
                resolve(user);
             }).catch(err=>{
-                console.log('登录失败');
+                message.error('登录失败')
               reject(err);
             })
         });
@@ -32,6 +34,7 @@ class AuthStore{
          return new Promise((resolve,reject)=>{
              Auth.register(this.values.username,this.values.password).then(user=>{
                  UserStore.pullUser()
+                 message.error('注册失败')
                  resolve(user);
              }).catch(err=>{
                  UserStore.resetUser()
