@@ -3,7 +3,7 @@ import React from "react";
 function Abount(){
     return (
         <>
-            <h1>Abount</h1>
+            <h1>About</h1>
         </>
     )
 };

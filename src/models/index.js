@@ -4,7 +4,7 @@ AV.init({
     appKey: "0oJbV3HKGc2Ce7sfouqW5x0a",
     serverURL: "https://qabl2aom.lc-cn-n1-shared.com"
 });
-
+//登录注册
 const Auth = {
     register(username, password) {
         let user = new User();

@@ -37,6 +37,7 @@ margin-left: 10px;
 const  Component = observer(() => {
     let navigate = useNavigate();
     const {UserStore,AuthStore}=useStores();
+    UserStore.pullUser();//重新拉取数据
     const handleLogout=()=>{
             AuthStore.logout();
     };

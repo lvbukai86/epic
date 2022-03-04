@@ -3,6 +3,7 @@ import {Auth} from "../models";
 import UserStore from './user';
 import {message} from "antd";
 
+
 class AuthStore{
     @observable values={
         username:'',
