@@ -34,10 +34,11 @@ class AuthStore{
          return new Promise((resolve,reject)=>{
              Auth.register(this.values.username,this.values.password).then(user=>{
                  UserStore.pullUser()
-                 message.error('注册失败')
+
                  resolve(user);
              }).catch(err=>{
                  UserStore.resetUser()
+                 message.error('注册失败')
                  reject(err);
              })
          });

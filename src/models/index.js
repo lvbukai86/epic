@@ -31,6 +31,7 @@ const Auth = {
 
 
 }
+    //操作数据库
 const Upload={
     add(file,filename){
         const item=new AV.Object('Image');
@@ -41,10 +42,24 @@ const Upload={
         return new Promise((resolve,reject)=>{
             item.save().then(serverFile=>resolve(serverFile),error=>reject(error));
         })
+    },
+    find(page=0,limit=10){
+        const query=new AV.Query('Image');
+        query.include('owner');
+        query.limit(limit);
+        query.skip(limit*page);
+        query.descending('createAt');
+        query.equalTo('owner',AV.User.current())
+        return new Promise((resolve,reject)=>{
+            query.find()
+                .then(results =>resolve(results))
+                .catch(error =>reject(error))
+        })
+
     }
 }
 
-
+window.Upload=Upload
 
 export {
     Auth,Upload
