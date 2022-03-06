@@ -11,15 +11,9 @@ const Component =observer(()=>{
         const {HistoryStore} = useStores();
         const [loading, setLoading] = useState(false);
         const [data, setData] = useState([]);
-
         const loadMoreData = () => {
-            if (loading) {
-                return;
-            }
-            console.log('触发自动加载')
             setLoading(true);
             HistoryStore.find();
-
         };
 
         useEffect(() => {
@@ -29,12 +23,17 @@ const Component =observer(()=>{
 return(
     <div
         id="scrollableDiv"
+        style={{
+            height: 400,
+            overflow: 'auto',
+            padding: '0 16px',
+            border: '1px solid rgba(140, 140, 140, 0.35)',
+        }}
     >
   <InfiniteScroll
       dataLength={HistoryStore.list.length}
       next={loadMoreData}
-      hasMore={HistoryStore.list.length<10}
-      loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+      hasMore={HistoryStore.hasMore}
       endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
       scrollableTarget="scrollableDiv"
   >

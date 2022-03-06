@@ -16,7 +16,6 @@ class HistoryStore{
     }
     @action find(){
         this.isLoading=true;
-        console.log(this.page)
         Upload.find(this.page,this.limit)
             .then(newList=>{
                 this.append(newList);

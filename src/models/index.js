@@ -46,7 +46,6 @@ const Upload={
     },
 
     find(page=0,limit=10){
-        console.log(page)
         const query=new AV.Query('Image');
         query.include('owner');
         query.limit(limit);
