@@ -3,53 +3,49 @@ import {observer} from "mobx-react";
 import {useStores} from "../stores";
 import { List,Spin , Divider,Skeleton,Avatar} from 'antd';
 import styled from "styled-components";
+import VirtualList from 'rc-virtual-list';
 const Img=styled.img`
 width: 100px;height:130px ;
 `;
-const Component =()=>{
+const Component =observer(()=>{
     const {HistoryStore}=useStores();
-    const loadMore = () => {
+    const ContainerHeight = 900;
+    const appendData = () => {//更多数据
         HistoryStore.find();
     };
-    HistoryStore.getList();
-    const data=HistoryStore.list;
-    useEffect(()=>{
-        console.log('进入组件');
-        return()=>{
-            console.log('卸载');
+    useEffect(() => {
+        appendData();
+    }, []);
+    const onScroll = e => {
+
+        if (e.target.scrollHeight - e.target.scrollTop === ContainerHeight) {
+            appendData();
+
         }
-    },[])
+    };
+
     return(
-        <div>
-           {/* <InfiniteScroll
-                initialLoad={true}
-                pageStart={0}
-                loadMore={loadMore}
-                hasMore={!HistoryStore.isLoading&&HistoryStore.hasMore}
-                useWindow={true}
-                dataLength={10}
-                endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
-            >*/}
-           {/* {item.attributes.filename}*/}
-            <List
-                dataSource={data}
-                renderItem={item => (
-                    <List.Item>
-
-
+        <List>
+            <VirtualList
+                data={HistoryStore.list}
+                height={ContainerHeight}
+                itemHeight={47}
+                itemKey="id"
+                onScroll={onScroll}
+            >
+                {item => (
+                    <List.Item key={item.id}>
                         <div>
                             <Img src={item.attributes.url.attributes.url}/>
                         </div>
                         <h5>{item.attributes.url.attributes.url}</h5>
                         <h5>{item.attributes.filename}</h5>
-
                     </List.Item>
-
                 )}
-            />
-            {/*</InfiniteScroll>*/}
-        </div>
+            </VirtualList>
+        </List>
+
     )
 
-};
+});
 export default Component;

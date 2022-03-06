@@ -33,6 +33,7 @@ const Auth = {
 }
     //操作数据库
 const Upload={
+    //上传照片
     add(file,filename){
         const item=new AV.Object('Image');
         const avFile=new AV.File(filename,file);
@@ -43,6 +44,7 @@ const Upload={
             item.save().then(serverFile=>resolve(serverFile),error=>reject(error));
         })
     },
+
     find(page=0,limit=10){
         const query=new AV.Query('Image');
         query.include('owner');

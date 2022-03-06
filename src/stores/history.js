@@ -16,10 +16,12 @@ class HistoryStore{
     }
     @action find(){
         this.isLoading=true;
+        console.log(this.page)
         Upload.find({page:this.page,limit:this.limit})
             .then(newList=>{
                 this.append(newList);
                 this.page++;
+
                 if(newList.length<this.limit){
                     this.hasMore=false;
                 }
