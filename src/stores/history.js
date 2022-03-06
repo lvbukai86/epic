@@ -15,6 +15,7 @@ class HistoryStore{
         this.list=this.list.concat(newList);
     }
     @action find(){
+
         this.isLoading=true;
         console.log(this.page)
         Upload.find({page:this.page,limit:this.limit})
@@ -31,13 +32,7 @@ class HistoryStore{
             this.isLoading=false;
         })
     }
-   @action getList(){
-       Upload.find({page:0,limit:10}).then(newList=>{
-           this.list=newList;
-       })
 
-
-   }
 
 }
 export default new HistoryStore();
