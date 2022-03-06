@@ -3,7 +3,6 @@ import {observer} from "mobx-react";
 import {useStores} from "../stores";
 import { List,Spin , Divider,Skeleton,Avatar} from 'antd';
 import styled from "styled-components";
-import VirtualList from 'rc-virtual-list';
 import InfiniteScroll from 'react-infinite-scroll-component';
 const Img=styled.img`
 width: 100px;height:130px ;
@@ -17,8 +16,10 @@ const Component =observer(()=>{
             if (loading) {
                 return;
             }
+            console.log('触发自动加载')
             setLoading(true);
             HistoryStore.find();
+
         };
 
         useEffect(() => {
@@ -26,7 +27,9 @@ const Component =observer(()=>{
         }, []);
 
 return(
-
+    <div
+        id="scrollableDiv"
+    >
   <InfiniteScroll
       dataLength={HistoryStore.list.length}
       next={loadMoreData}
@@ -48,8 +51,7 @@ return(
           )}
       />
   </InfiniteScroll>
-
-
+    </div>
 )
 
 });
