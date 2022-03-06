@@ -18,7 +18,7 @@ class HistoryStore{
 
         this.isLoading=true;
         console.log(this.page)
-        Upload.find({page:this.page,limit:this.limit})
+        Upload.find(this.page,this.limit)
             .then(newList=>{
                 this.append(newList);
                 this.page++;

@@ -9,19 +9,6 @@ const Img=styled.img`
 width: 100px;height:130px ;
 `;
 const Component =observer(()=>{
-    /*const {HistoryStore}=useStores();
-    const appendData = () => {//更多数据
-        HistoryStore.find();
-    };
-    useEffect(() => {
-        appendData();
-    }, []);
-    const onScroll = e => {
-        if (e.target.scrollHeight - e.target.scrollTop === ContainerHeight) {
-            HistoryStore.find();
-        }
-    };*/
-
         const {HistoryStore} = useStores();
         const [loading, setLoading] = useState(false);
         const [data, setData] = useState([]);
