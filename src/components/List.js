@@ -18,6 +18,9 @@ const Component =observer(()=>{
 
         useEffect(() => {
             loadMoreData();
+            return()=>{
+                HistoryStore.reset();
+            }
         }, []);
 
 return(

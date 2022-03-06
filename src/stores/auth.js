@@ -2,6 +2,7 @@ import {observable,action,makeObservable} from 'mobx';
 import {Auth} from "../models";
 import UserStore from './user';
 import {message} from "antd";
+import HistoryStore  from './history'
 
 
 class AuthStore{
@@ -14,7 +15,6 @@ class AuthStore{
     }
     @action setUsername(username){
         this.values.username=username;
-
     }
     @action setPassword(password){
     this.values.password=password;
@@ -48,6 +48,7 @@ class AuthStore{
     @action logout(){
        Auth.logout()
         UserStore.resetUser()
+        HistoryStore.reset()
     }
 }
 

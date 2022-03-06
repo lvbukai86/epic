@@ -1,6 +1,7 @@
 import {observable, action, makeObservable} from 'mobx';
 import {Auth} from "../models";
 
+
 class UserStore {
     constructor() {
         makeObservable(this);
@@ -11,6 +12,7 @@ class UserStore {
     }
     @action resetUser(){
         this.currentUser=null;
+
     }
 }
 export default new UserStore();
