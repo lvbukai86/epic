@@ -38,8 +38,12 @@ class AuthStore{
 
                  resolve(user);
              }).catch(err=>{
-                 UserStore.resetUser()
-                 message.error('注册失败')
+                 UserStore.resetUser();
+                 if(err.code == '202'){
+                     message.error('此用户名已存在');
+                 }else{
+                     message.error('注册失败');
+                 }
                  reject(err);
              })
          });
